@@ -39,11 +39,21 @@ export default class App extends React.Component {
       ],
     });
   };
+
   ontilepress = (row, col) => {
+    var value = this.state.gamestate[row][col];
+    if (value !== 0) {
+      return;
+    }
+
     var player = this.state.currentplayer;
     var arr = this.state.gamestate.slice();
     arr[row][col] = player;
     this.setState({ gamestate: arr });
+
+    //switch
+    var nextp = player == 1 ? -1 : 1;
+    this.setState({ currentplayer: nextp });
   };
 
   renderIcon = (row, col) => {
@@ -52,9 +62,9 @@ export default class App extends React.Component {
       case 1:
         return <Icon name="close" style={styles.tilex} />;
       case -1:
-        <Icon name="close" style={styles.tileo} />;
+        return <Icon name="circle-outline" style={styles.tileo} />;
       default:
-        <View />;
+        return <View />;
     }
   };
 
@@ -129,13 +139,6 @@ export default class App extends React.Component {
             {this.renderIcon(2, 2)}
           </TouchableOpacity>
         </View>
-        <View>
-          <Text></Text>
-        </View>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={{ fontSize: 20, padding: 20 }}>Player 2 : X</Text>
-        </View>
-        <StatusBar style="auto" />
       </View>
     );
   }
@@ -154,7 +157,7 @@ const styles = StyleSheet.create({
     fontSize: 60,
   },
   tileo: {
-    color: "white",
+    color: "black",
     fontSize: 60,
   },
 });
