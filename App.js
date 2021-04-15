@@ -1,5 +1,7 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
+import { MaterialCommunityIcons as Icon } from "react-native-vector-icons";
+
 import {
   StyleSheet,
   Text,
@@ -11,51 +13,133 @@ import {
   Pressable,
   SafeAreaView,
 } from "react-native";
+import { render } from "react-dom";
 
-export default function App() {
-  const [turn, setturn] = useState("player1");
-  return (
-    <View style={styles.container}>
-      <View>
-        <SafeAreaView style={header.container}>
-          <Text>
-            <h1>Tic Tac Toe Game</h1>
-          </Text>
-        </SafeAreaView>
-      </View>
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      gamestate: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+      currentplayer: 1,
+    };
+  }
+  componentDidMount() {
+    this.initialize();
+  }
+  initialize = () => {
+    this.setState({
+      gamestate: [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0],
+      ],
+    });
+  };
+  ontilepress = (row, col) => {
+    var player = this.state.currentplayer;
+    var arr = this.state.gamestate.slice();
+    arr[row][col] = player;
+    this.setState({ gamestate: arr });
+  };
 
-      <View style={{ flexDirection: "row" }}>
-        <View style={table.container}></View>
-        <View style={table.container}></View>
-        <View style={table.container}></View>
+  renderIcon = (row, col) => {
+    var value = this.state.gamestate[row][col];
+    switch (value) {
+      case 1:
+        return <Icon name="close" style={styles.tilex} />;
+      case -1:
+        <Icon name="close" style={styles.tileo} />;
+      default:
+        <View />;
+    }
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <View>
+          <SafeAreaView>
+            <Text>
+              <h1>Tic Tac Toe Game</h1>
+            </Text>
+          </SafeAreaView>
+        </View>
+
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity
+            onPress={() => this.ontilepress(0, 0)}
+            style={table.container}
+          >
+            {this.renderIcon(0, 0)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={table.container}
+            onPress={() => this.ontilepress(0, 1)}
+          >
+            {this.renderIcon(0, 1)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.ontilepress(0, 2)}
+            style={table.container}
+          >
+            {this.renderIcon(0, 2)}
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity
+            onPress={() => this.ontilepress(1, 0)}
+            style={table.container}
+          >
+            {this.renderIcon(1, 0)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.ontilepress(1, 1)}
+            style={table.container}
+          >
+            {this.renderIcon(1, 1)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.ontilepress(1, 2)}
+            style={table.container}
+          >
+            {this.renderIcon(1, 2)}
+          </TouchableOpacity>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity
+            onPress={() => this.ontilepress(2, 0)}
+            style={table.container}
+          >
+            {this.renderIcon(2, 0)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.ontilepress(2, 1)}
+            style={table.container}
+          >
+            {this.renderIcon(2, 1)}
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => this.ontilepress(2, 2)}
+            style={table.container}
+          >
+            {this.renderIcon(2, 2)}
+          </TouchableOpacity>
+        </View>
+        <View>
+          <Text></Text>
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <Text style={{ fontSize: 20, padding: 20 }}>Player 2 : X</Text>
+        </View>
+        <StatusBar style="auto" />
       </View>
-      <View style={{ flexDirection: "row" }}>
-        <View style={table.container}></View>
-        <View style={table.container}></View>
-        <View style={table.container}></View>
-      </View>
-      <View style={{ flexDirection: "row" }}>
-        <View style={table.container}></View>
-        <View style={table.container}></View>
-        <View style={table.container}></View>
-      </View>
-      <View>
-        <Text></Text>
-      </View>
-      <View style={{ flexDirection: "row" }}>
-        <Text style={{ fontSize: 20, padding: 20 }}>Player 2 : X</Text>
-      </View>
-      <StatusBar style="auto" />
-    </View>
-  );
+    );
+  }
 }
-const Header = (props) => {
-  return (
-    <View>
-      <Text style={headerStyles.text}>{props.game_title}</Text>
-    </View>
-  );
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -64,6 +148,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  tilex: {
+    color: "black",
+    fontSize: 60,
+  },
+  tileo: {
+    color: "white",
+    fontSize: 60,
   },
 });
 const table = StyleSheet.create({
@@ -74,7 +166,7 @@ const table = StyleSheet.create({
     borderColor: "black",
     height: 80,
     borderBottomWidth: 1,
-    borderWidth: 1,
+    borderWidth: 2,
     padding: 10,
     width: 100,
   },
