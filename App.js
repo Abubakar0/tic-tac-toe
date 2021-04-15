@@ -25,42 +25,19 @@ export default function App() {
       </View>
 
       <View style={{ flexDirection: "row" }}>
-        <Text style={{ fontSize: 20, padding: 20 }}>Player 1 : O</Text>
-      </View>
-      <View></View>
-
-      <View style={{ flexDirection: "row" }}>
-        <View style={table.container}>
-          <Pressable></Pressable>
-        </View>
-        <View style={table.container}>
-          <Pressable></Pressable>
-        </View>
-        <View style={table.container}>
-          <Pressable></Pressable>
-        </View>
+        <View style={table.container}></View>
+        <View style={table.container}></View>
+        <View style={table.container}></View>
       </View>
       <View style={{ flexDirection: "row" }}>
-        <View style={table.container}>
-          <Pressable></Pressable>
-        </View>
-        <View style={table.container}>
-          <Pressable></Pressable>
-        </View>
-        <View style={table.container}>
-          <Pressable></Pressable>
-        </View>
+        <View style={table.container}></View>
+        <View style={table.container}></View>
+        <View style={table.container}></View>
       </View>
       <View style={{ flexDirection: "row" }}>
-        <View style={table.container}>
-          <Pressable></Pressable>
-        </View>
-        <View style={table.container}>
-          <Pressable></Pressable>
-        </View>
-        <View style={table.container}>
-          <Pressable></Pressable>
-        </View>
+        <View style={table.container}></View>
+        <View style={table.container}></View>
+        <View style={table.container}></View>
       </View>
       <View>
         <Text></Text>
@@ -96,8 +73,6 @@ const table = StyleSheet.create({
     color: "#000000",
     borderColor: "black",
     height: 80,
-    borderTopWidth: 0,
-    borderLeftWidth: 0,
     borderBottomWidth: 1,
     borderWidth: 1,
     padding: 10,
