@@ -118,9 +118,9 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <View>
           <SafeAreaView style={{ paddingBottom: 30 }}>
-            <Text>
-              <h1>Tic Tac Toe Game</h1>
-            </Text>
+            <Text style={{ fontSize: 40 }}>Tic Tac Toe game</Text>
+            <Text style={{ fontSize: 20 }}>Player 1=X</Text>
+            <Text style={{ fontSize: 20 }}>Player 2=O</Text>
           </SafeAreaView>
         </View>
 
@@ -225,6 +225,6 @@ const header = StyleSheet.create({
   container: {
     backgroundColor: "orange",
     alignItems: "center",
-    justifyContent: "top",
+    justifyContent: "center",
   },
 });
